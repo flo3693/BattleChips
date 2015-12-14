@@ -109,3 +109,4 @@ nb-configuration.xml
 *.ear
 
 
+/BattleChips/nbproject/private/
