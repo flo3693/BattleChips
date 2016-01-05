@@ -32,6 +32,11 @@ public class Chip {
                 return false;
         }            
         return true;
-    }   
+    }
+    
+    public void setCoordonates(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
     
 }
