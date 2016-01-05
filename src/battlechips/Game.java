@@ -18,7 +18,7 @@ public class Game {
         
     }
     
-    public static void readCommand(){
+    public static void readCommand(String input){
         
     }
     

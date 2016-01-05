@@ -12,18 +12,23 @@ package battlechips;
 public class Chip {
     int x;
     int y;
-    int direction;
+    int direction;// 0=> horizontal  1=> vertical
     int size;
     boolean[] hit;
     
     public Chip(int n){
-        
+        // génération d'un nombre aléatoire entre 0 et 100 puis modulo 2 pour obtenir 0 ou 1
+        this.direction = ((int)( Math.random()*101))%2;
+        this.size = n;
+        for(int i=0; i<n; i++){
+            this.hit[i]=false;
+        }
     }
     
     public boolean isSunk(){
         for(int i=0; i<this.size;i++)
         {
-            if(hit[i]==false)
+            if(this.hit[i]==false)
                 return false;
         }            
         return true;
