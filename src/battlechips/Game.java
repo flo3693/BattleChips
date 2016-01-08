@@ -5,6 +5,9 @@
  */
 package battlechips;
 
+import java.util.Scanner;
+import java.util.regex.*;
+
 /**
  *
  * @author Florian
@@ -33,14 +36,27 @@ public class Game {
     }
     
     public static void readCommand(String command){
-        if(command.length()>2)
-            System.out.println("Veuillez rentrer une commande valide");
-        else{
-            command.toUpperCase();
-            if(command == "Q"){
-                
+        Scanner sc = new Scanner(System.in);
+        command.toUpperCase();
+        if(command == "Q" || command == "QUIT"){
+            System.exit(0);
+        }
+        else if(command == "R" || command=="RESTART"){
+            createNewBoard();
+        }
+        else {
+            Pattern pattern = Pattern.compile("[A-J][10|[1-9]]");
+            Matcher matcher = pattern.matcher(command);
+            while(true){
+                if(command.length()>2 || !matcher.find()){
+                    System.out.println("Veuillez rentrer une commande valide au format lettre-chiffre :");
+                    command = sc.nextLine();                    
+                }
+                else{
+                    currentBoard.fire(Integer.parseInt(command.substring(0,1)),Integer.parseInt(command.substring(1)));
+                    break;
+                }
             }
-           
         }
     }
     
