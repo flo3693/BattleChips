@@ -34,27 +34,30 @@ public class Board {
         
         nbFires = 0;
         
-        initChip();
+        initChips();
     }
     
-    private void initChip(){
+    private void initChips(){
         Random r = new Random();
-        int x = 1 + r.nextInt(9);
-        int y = 1 + r.nextInt(9);
-        chips[0].setCoordonates(x, y);
+    	System.out.println("I start initship");
+        int row = ((chips[0].direction==0)?1+r.nextInt(9-chips[0].size):1+r.nextInt(9));
+        int col = ((chips[0].direction==1)?1+r.nextInt(9-chips[0].size):1+r.nextInt(9));
+    	
+        chips[0].setCoordonates(row, col);
         int i = 1;
         boolean collisionDetected = false;
+        System.out.println("right before the loop");
         while(i<5){
-            x = 1 + r.nextInt(9);
-            y = 1 + r.nextInt(9);
+            row = ((chips[i].direction==0)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9)); 
+            col = ((chips[i].direction==1)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9));
             for(int j=0;j<i;j++){
-                if(collision(x, y, chips[i].getDirection(), chips[i].getSize(), chips[j])){
+                if(collision(row, col, chips[i].getDirection(), chips[i].getSize(), chips[j])){
                     collisionDetected = true;
                     break;
                 }
             }            
             if(!collisionDetected){
-                chips[i].setCoordonates(x, y);
+                chips[i].setCoordonates(row, col);
                 i++;
             }
         }
@@ -74,16 +77,19 @@ public class Board {
     }
     
     public void display(){
+    	
+    	System.out.println("  A   B   C   D   E   F   G   H   I   J");
+        System.out.println(" ---------------------------------------");
         for(int i=0;i<10; i++){
-            System.out.println(" A   B   C   D   E   F   G   H   I   J");
-            System.out.println(" ---------------------------------------");
+            
             //System.out.print("|   |   |   |   |   |   |   |   |   |   |");
             System.out.print("| ");
             for(int j=0;j<10;j++){
+            	//System.out.print(" | ");
                 if(sea[i][j]==State.HIT)
                     System.out.print("X");
                 else if(sea[i][j]==State.UNKNOWN)
-                    System.out.print(" ");
+                    System.out.print("-");
                 else
                     System.out.print("O");
                 System.out.print(" | ");
@@ -98,41 +104,44 @@ public class Board {
      * @param y
      * @return
      */
-    public boolean fire(int x, int y){
-        if(sea[x][y]!=State.UNKNOWN){
+    public boolean fire(int row, int col){
+        if(sea[row][col]!=State.UNKNOWN){
             System.out.println("You already fired this cell. Try another one !");
             return false;
         }
         
         for(Chip c : chips){
             if(c.direction==0){// if the chip is horizontally placed
-                if(x!=c.x){// if they don't have the same x, it means the fire is gone into water because they're not on the same line
-                    sea[x][y]=State.WATER;
-                }
-                if(y>=c.y && y<=(c.y+c.size)){// we hit a chip
-                    sea[x][y]=State.HIT;
-                    c.hit[y-c.y] = true;// update the cell of the boat because it was hitten (y-c.y will return the index of the hitten cell)
+                if(row!=c.row){// if they don't have the same x, it means the fire is gone into water because they're not on the same line
+                    sea[row][col]=State.WATER;
                 }
                 else{
-                    sea[x][y]=State.WATER;
+                	if(col>=c.col && col<=(c.col+c.size)){// we hit a chip
+                		sea[row][col]=State.HIT;
+                		c.hit[col-c.col] = true;// update the cell of the boat because it was hitten (y-c.y will return the index of the hitten cell)
+                	}
+                	else{
+                    sea[row][col]=State.WATER;
+                	}
                 }
             }
             else{
-                if(y!=c.y){// if they don't have the same y, it means the fire is gone into water because they're not on the same column
-                    sea[x][y]=State.WATER;
-                }
-                if(x>=c.x && y<=(c.x+c.size)){// we hit a chip
-                    sea[x][y]=State.HIT;
-                    c.hit[x-c.x] = true;// update the cell of the boat because it was hitten (x-c.x will return the index of the hitten cell)
+                if(col!=c.col){// if they don't have the same y, it means the fire is gone into water because they're not on the same column
+                    sea[row][col]=State.WATER;
                 }
                 else{
-                    sea[x][y]=State.WATER;
+	                if(row>=c.row && row<=(c.row+c.size)){// we hit a chip
+	                    sea[row][col]=State.HIT;
+	                    c.hit[row-c.row] = true;// update the cell of the boat because it was hitten (x-c.x will return the index of the hitten cell)
+	                }
+	                else{
+	                    sea[row][col]=State.WATER;
+	                }
                 }
             }
         }
         return true;
     }
-    
     
     /**
      * Returns whether an object collides a "chip".
@@ -144,23 +153,25 @@ public class Board {
      * @return true if the object collides the "chip".
      */
     public boolean collision(int col, int row, int direction, int size, Chip chip) {
+    	boolean collide = false;
     	if (chip.direction == 0) {
     		if (direction == 0) {
-    			return row == chip.row &&
+    			collide = row == chip.row &&
     					col < chip.col + chip.size && col + size > chip.col;
     		} else if (direction == 1) {
-    			return row <= chip.row && row + size > chip.row &&
+    			collide = row <= chip.row && row + size > chip.row &&
     					col >= chip.col && col < chip.col + chip.size;
     		}
     	} else if (chip.direction == 1) {
     		if (direction == 0) {
-    			return col <= chip.col && col + size > chip.col &&
+    			collide = col <= chip.col && col + size > chip.col &&
     					row >= chip.row && row < chip.row + chip.size;
     		} else if (direction == 1) {
-    			return col == chip.col &&
+    			collide = col == chip.col &&
     					row < chip.row + chip.size && row + size > chip.row;
     		}
     	}
+    	return collide;
     }
     
 }

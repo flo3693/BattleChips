@@ -10,8 +10,8 @@ package battlechips;
  * @author Florian
  */
 public class Chip {
-    int x;
-    int y;
+    int row;
+    int col;
     int direction;// 0=> horizontal  1=> vertical
     int size;
     boolean[] hit;
@@ -19,9 +19,15 @@ public class Chip {
     public Chip(int n){
         // génération d'un nombre aléatoire entre 0 et 100 puis modulo 2 pour obtenir 0 ou 1
         this.direction = ((int)( Math.random()*101))%2;
+       
         this.size = n;
+        
+        hit = new boolean[this.size+1];
+        
         for(int i=0; i<n; i++){
+
             this.hit[i]=false;
+            
         }
     }
     
@@ -50,9 +56,9 @@ public class Chip {
     	return size;
     }
     
-    public void setCoordonates(int x, int y){
-        this.x=x;
-        this.y=y;
+    public void setCoordonates(int row, int col){
+        this.row=row;
+        this.col=col;
     }
     
 }
