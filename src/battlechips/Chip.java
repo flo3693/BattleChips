@@ -34,6 +34,22 @@ public class Chip {
         return true;
     }
     
+    /**
+     * Gets the direction of a "chip".
+     * @return the direction of a "chip".
+     */
+    public int getDirection() {
+    	return direction;
+    }
+    
+    /**
+     * Gets the size of a "chip".
+     * @return the size of a "chip".
+     */
+    public int getSize() {
+    	return size;
+    }
+    
     public void setCoordonates(int x, int y){
         this.x=x;
         this.y=y;

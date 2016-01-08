@@ -48,7 +48,7 @@ public class Board {
             x = 1 + r.nextInt(9);
             y = 1 + r.nextInt(9);
             for(int j=0;j<i;j++){
-                if(collision(x, y, chips[i], chips[j])){
+                if(collision(x, y, chips[i].getDirection(), chips[i].getSize(), chips[j])){
                     collisionDetected = true;
                     break;
                 }
@@ -60,6 +60,10 @@ public class Board {
         }
     }
     
+    /**
+     * Returns whether the game board is finished.
+     * @return true if the game board is finished.
+     */
     public boolean isFinished(){
         for(int i=0;i<5;i++)
         {
@@ -89,6 +93,11 @@ public class Board {
         System.out.println(" ---------------------------------------");        
     }
     
+    /**
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean fire(int x, int y){
         if(sea[x][y]!=State.UNKNOWN){
             System.out.println("You already fired this cell. Try another one !");
@@ -124,49 +133,34 @@ public class Board {
         return true;
     }
     
-    public boolean collision(int x, int y, Chip chipToPlace, Chip chipAlreadyPlaced){
-        if(chipAlreadyPlaced.direction==0){//horizontal chipAlreadyPlaced
-            if(chipToPlace.direction==0){//horizontal chipToPlace
-                if(x!=chipAlreadyPlaced.x)// if they are not on the same line : no collision
-                    return false;
-                else{// they are on the same line
-                    if(y>=chipAlreadyPlaced.y && y<=(chipAlreadyPlaced.y+chipAlreadyPlaced.size))// y is in the chip : collision
-                        return true;
-                    else// y not in the ship : no collision
-                        return false;
-                }
-            }
-            else{//vertical chipToPlace
-                if(chipAlreadyPlaced.x>=x && chipAlreadyPlaced.x<=(x+chipToPlace.size))// x is inside the possible x of the chip already placed
-                    if(chipAlreadyPlaced.y==y)// and they have the same y : collision
-                        return true;
-                    else // and they don't share the same y : no collision
-                        return false;
-                else // x is not inside the possible x of the chip already placed : no collison
-                    return false;
-            }
-        }
-        else{//vertical chipAlreadyPlaced
-            if(chipToPlace.direction==0){//horizontal chipToPlace
-                if(chipAlreadyPlaced.y>=y && chipAlreadyPlaced.y<=(y+chipToPlace.size))// y is inside the possible y of the chip already placed
-                    if(chipAlreadyPlaced.x==x)// and they have the same x : collision
-                        return true;
-                    else // and they don't share the same x : no collision
-                        return false;
-                else // y is not inside the possible y of the chip already placed : no collison
-                    return false;
-            }
-            else{//vertical chipToPlace
-                if(y!=chipAlreadyPlaced.y)// if they are not on the same column : no collision
-                    return false;
-                else{// they are on the same line
-                    if(x>=chipAlreadyPlaced.x && x<=(chipAlreadyPlaced.x+chipAlreadyPlaced.size))// x is in the chip : collision
-                        return true;
-                    else// x not in the ship : no collision
-                        return false;
-                }
-            }            
-        }
+    
+    /**
+     * Returns whether an object collides a "chip".
+     * @param col The column index of the object.
+     * @param row The row index of the object.
+     * @param direction The direction of the object.
+     * @param size The size of the object.
+     * @param chip The "chip" to collide.
+     * @return true if the object collides the "chip".
+     */
+    public boolean collision(int col, int row, int direction, int size, Chip chip) {
+    	if (chip.direction == 0) {
+    		if (direction == 0) {
+    			return row == chip.row &&
+    					col < chip.col + chip.size && col + size > chip.col;
+    		} else if (direction == 1) {
+    			return row <= chip.row && row + size > chip.row &&
+    					col >= chip.col && col < chip.col + chip.size;
+    		}
+    	} else if (chip.direction == 1) {
+    		if (direction == 0) {
+    			return col <= chip.col && col + size > chip.col &&
+    					row >= chip.row && row < chip.row + chip.size;
+    		} else if (direction == 1) {
+    			return col == chip.col &&
+    					row < chip.row + chip.size && row + size > chip.row;
+    		}
+    	}
     }
     
 }

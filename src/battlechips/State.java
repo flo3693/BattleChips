@@ -6,9 +6,11 @@
 package battlechips;
 
 /**
- *
+ * Represents the game state of a board cell.
  * @author Florian
  */
 public enum State {
-    WATER, HIT, UNKNOWN;
+    WATER, // No "chip" on this cell.
+    HIT, // A "chip" was hit on the cell.
+    UNKNOWN; // 
 }
