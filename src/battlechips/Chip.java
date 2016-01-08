@@ -10,8 +10,8 @@ package battlechips;
  * @author Florian
  */
 public class Chip {
-    int x;
-    int y;
+    int row;
+    int col;
     int direction;// 0=> horizontal  1=> vertical
     int size;
     boolean[] hit;
@@ -40,9 +40,9 @@ public class Chip {
         return true;
     }
     
-    public void setCoordonates(int x, int y){
-        this.x=x;
-        this.y=y;
+    public void setCoordonates(int row, int col){
+        this.row=row;
+        this.col=col;
     }
     
 }

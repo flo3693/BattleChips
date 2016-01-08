@@ -21,20 +21,27 @@ public class Game {
     	System.out.println("board initiated");
     	currentBoard.display();
     	while(!currentBoard.isFinished()){
-    	x = 0 + (int)(Math.random()*10); 
-    	y = 0 + (int)(Math.random()*10);
-    	System.out.println(x);
-    	System.out.println(y);
-    	currentBoard.fire(x, y);
-    	currentBoard.display();
+            /*x = 0 + (int)(Math.random()*10); 
+            y = 0 + (int)(Math.random()*10);
+            System.out.println(x);
+            System.out.println(y);
+            currentBoard.fire(x, y);
+            currentBoard.display();*/
     	}
     	System.out.println("game finished !");
     
     }
     
-    public static void readCommand(){
-    	
-    	currentBoard.fire(1, 5);
+    public static void readCommand(String command){
+        if(command.length()>2)
+            System.out.println("Veuillez rentrer une commande valide");
+        else{
+            command.toUpperCase();
+            if(command == "Q"){
+                
+            }
+           
+        }
     }
     
     
