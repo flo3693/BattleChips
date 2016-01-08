@@ -5,6 +5,7 @@
  */
 package battlechips;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -17,22 +18,12 @@ public class Game {
     static Board currentBoard;
     static boolean quit = false;
     
-    public static void createNewBoard(){
-    	int x,y;
-    	System.out.println("welcome");
-    	currentBoard = new Board();
-    	System.out.println("board initiated");
-    	currentBoard.display();
-    	while(!currentBoard.isFinished()){
-            /*x = 0 + (int)(Math.random()*10); 
-            y = 0 + (int)(Math.random()*10);
-            System.out.println(x);
-            System.out.println(y);
-            currentBoard.fire(x, y);
-            currentBoard.display();*/
-    	}
-    	System.out.println("game finished !");
+    public Game(){
+        currentBoard = new Board();
+    }
     
+    public static void createNewBoard(){
+    	currentBoard = new Board();
     }
     
     public static void readCommand(String command){
@@ -50,10 +41,23 @@ public class Game {
             while(true){
                 if(command.length()>2 || !matcher.find()){
                     System.out.println("Veuillez rentrer une commande valide au format lettre-chiffre :");
-                    command = sc.nextLine();                    
+                    command = sc.nextLine(); 
+                    command.toUpperCase();
                 }
                 else{
-                    currentBoard.fire(Integer.parseInt(command.substring(0,1)),Integer.parseInt(command.substring(1)));
+                    ArrayList<String> letters = new ArrayList<String>();
+                    letters.add("A");
+                    letters.add("B");
+                    letters.add("C");
+                    letters.add("D");
+                    letters.add("E");
+                    letters.add("F");
+                    letters.add("G");
+                    letters.add("H");
+                    letters.add("I");
+                    letters.add("J");
+                    int col = letters.indexOf(command.substring(0,1));
+                    currentBoard.fire(Integer.parseInt(command.substring(1))-1,col);
                     break;
                 }
             }

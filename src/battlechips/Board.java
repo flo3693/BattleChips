@@ -51,10 +51,12 @@ public class Board {
             row = ((chips[i].direction==0)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9)); 
             col = ((chips[i].direction==1)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9));
             for(int j=0;j<i;j++){
+                System.out.println("collision in");
                 if(collision(row, col, chips[i].getDirection(), chips[i].getSize(), chips[j])){
                     collisionDetected = true;
                     break;
                 }
+                System.out.println("collision out");
             }            
             if(!collisionDetected){
                 chips[i].setCoordonates(row, col);
