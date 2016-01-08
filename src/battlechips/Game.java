@@ -15,11 +15,26 @@ public class Game {
     static boolean quit = false;
     
     public static void createNewBoard(){
-        
+    	int x,y;
+    	System.out.println("welcome");
+    	currentBoard = new Board();
+    	System.out.println("board initiated");
+    	currentBoard.display();
+    	while(!currentBoard.isFinished()){
+    	x = 0 + (int)(Math.random()*10); 
+    	y = 0 + (int)(Math.random()*10);
+    	System.out.println(x);
+    	System.out.println(y);
+    	currentBoard.fire(x, y);
+    	currentBoard.display();
+    	}
+    	System.out.println("game finished !");
+    
     }
     
-    public static void readCommand(String input){
-        
+    public static void readCommand(){
+    	
+    	currentBoard.fire(1, 5);
     }
     
     

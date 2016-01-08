@@ -38,15 +38,20 @@ public class Board {
     }
     
     private void initChip(){
-        Random r = new Random();
-        int x = 1 + r.nextInt(9);
-        int y = 1 + r.nextInt(9);
+        //Random r = new Random();
+    	System.out.println("I start initship");
+        int x = 0; // + (int)(Math.random()*5);
+        int y = 0; // + (int)(Math.random()*5);
+    	
         chips[0].setCoordonates(x, y);
         int i = 1;
         boolean collisionDetected = false;
+        System.out.println("right before the loop");
         while(i<5){
-            x = 1 + r.nextInt(9);
-            y = 1 + r.nextInt(9);
+        	x = 0 + (int)(Math.random()*5); 
+        	y = 0 + (int)(Math.random()*5);
+        	System.out.println(x);
+        	System.out.println(y);
             for(int j=0;j<i;j++){
                 if(collision(x, y, chips[i], chips[j])){
                     collisionDetected = true;
@@ -70,16 +75,19 @@ public class Board {
     }
     
     public void display(){
+    	
+    	System.out.println(" A   B   C   D   E   F   G   H   I   J");
+        System.out.println(" ---------------------------------------");
         for(int i=0;i<10; i++){
-            System.out.println(" A   B   C   D   E   F   G   H   I   J");
-            System.out.println(" ---------------------------------------");
+            
             //System.out.print("|   |   |   |   |   |   |   |   |   |   |");
-            System.out.print("| ");
+            //System.out.print("| ");
             for(int j=0;j<10;j++){
+            	System.out.print(" | ");
                 if(sea[i][j]==State.HIT)
                     System.out.print("X");
                 else if(sea[i][j]==State.UNKNOWN)
-                    System.out.print(" ");
+                    System.out.print("-");
                 else
                     System.out.print("O");
                 System.out.print(" | ");
@@ -100,24 +108,28 @@ public class Board {
                 if(x!=c.x){// if they don't have the same x, it means the fire is gone into water because they're not on the same line
                     sea[x][y]=State.WATER;
                 }
-                if(y>=c.y && y<=(c.y+c.size)){// we hit a chip
-                    sea[x][y]=State.HIT;
-                    c.hit[y-c.y] = true;// update the cell of the boat because it was hitten (y-c.y will return the index of the hitten cell)
-                }
                 else{
+                	if(y>=c.y && y<=(c.y+c.size)){// we hit a chip
+                		sea[x][y]=State.HIT;
+                		c.hit[y-c.y] = true;// update the cell of the boat because it was hitten (y-c.y will return the index of the hitten cell)
+                	}
+                	else{
                     sea[x][y]=State.WATER;
+                	}
                 }
             }
             else{
                 if(y!=c.y){// if they don't have the same y, it means the fire is gone into water because they're not on the same column
                     sea[x][y]=State.WATER;
                 }
-                if(x>=c.x && y<=(c.x+c.size)){// we hit a chip
-                    sea[x][y]=State.HIT;
-                    c.hit[x-c.x] = true;// update the cell of the boat because it was hitten (x-c.x will return the index of the hitten cell)
-                }
                 else{
-                    sea[x][y]=State.WATER;
+	                if(x>=c.x && x<=(c.x+c.size)){// we hit a chip
+	                    sea[x][y]=State.HIT;
+	                    c.hit[x-c.x] = true;// update the cell of the boat because it was hitten (x-c.x will return the index of the hitten cell)
+	                }
+	                else{
+	                    sea[x][y]=State.WATER;
+	                }
                 }
             }
         }
@@ -138,7 +150,7 @@ public class Board {
             }
             else{//vertical chipToPlace
                 if(chipAlreadyPlaced.x>=x && chipAlreadyPlaced.x<=(x+chipToPlace.size))// x is inside the possible x of the chip already placed
-                    if(chipAlreadyPlaced.y==y)// and they have the same y : collision
+                    if(chipAlreadyPlaced.y>=y && y<=(y+chipAlreadyPlaced.size))// and they have the same y : collision
                         return true;
                     else // and they don't share the same y : no collision
                         return false;
@@ -149,7 +161,7 @@ public class Board {
         else{//vertical chipAlreadyPlaced
             if(chipToPlace.direction==0){//horizontal chipToPlace
                 if(chipAlreadyPlaced.y>=y && chipAlreadyPlaced.y<=(y+chipToPlace.size))// y is inside the possible y of the chip already placed
-                    if(chipAlreadyPlaced.x==x)// and they have the same x : collision
+                    if(chipAlreadyPlaced.x>=x && x<=(x+chipAlreadyPlaced.size))// and they have the same x : collision
                         return true;
                     else // and they don't share the same x : no collision
                         return false;

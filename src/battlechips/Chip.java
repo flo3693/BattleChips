@@ -19,9 +19,15 @@ public class Chip {
     public Chip(int n){
         // génération d'un nombre aléatoire entre 0 et 100 puis modulo 2 pour obtenir 0 ou 1
         this.direction = ((int)( Math.random()*101))%2;
+       
         this.size = n;
+        
+        hit = new boolean[this.size+1];
+        
         for(int i=0; i<n; i++){
+
             this.hit[i]=false;
+            
         }
     }
     
