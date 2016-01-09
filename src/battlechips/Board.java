@@ -101,47 +101,35 @@ public class Board {
         System.out.println(" ---------------------------------------");        
     }
     
-    /**
-     * @param x
-     * @param y
-     * @return
+    /** Fires at the position specified via row and col
+     * @param row
+     * @param col
+     * @return true if the fire hit a cell never hitten before
      */
     public boolean fire(int row, int col){
         if(sea[row][col]!=State.UNKNOWN){
             System.out.println("You already fired this cell. Try another one !");
             return false;
-        }
-        
+        }        
         for(Chip c : chips){
             if(c.direction==0){// if the chip is horizontally placed
-                if(row!=c.row){// if they don't have the same x, it means the fire is gone into water because they're not on the same line
-                    sea[row][col]=State.WATER;
-                }
-                else{
-                	if(col>=c.col && col<=(c.col+c.size)){// we hit a chip
-                		sea[row][col]=State.HIT;
-                		c.hit[col-c.col] = true;// update the cell of the boat because it was hitten (y-c.y will return the index of the hitten cell)
-                	}
-                	else{
-                    sea[row][col]=State.WATER;
-                	}
+                if(row==c.row){// if the fire is on the same line as the chip
+                    if(col>=c.col && col<=(c.col+c.size)){// we hit a chip
+                        sea[row][col]=State.HIT;// update the cell of the boat because it was hitten (col-c.col will return the index of the hitten cell)
+                        return true;
+                    }
                 }
             }
             else{
-                if(col!=c.col){// if they don't have the same y, it means the fire is gone into water because they're not on the same column
-                    sea[row][col]=State.WATER;
-                }
-                else{
-	                if(row>=c.row && row<=(c.row+c.size)){// we hit a chip
-	                    sea[row][col]=State.HIT;
-	                    c.hit[row-c.row] = true;// update the cell of the boat because it was hitten (x-c.x will return the index of the hitten cell)
-	                }
-	                else{
-	                    sea[row][col]=State.WATER;
-	                }
+                if(col==c.col){// if the fire is on the same column as the chip
+                    if(row>=c.row && row<=(c.row+c.size)){// we hit a chip
+                        sea[row][col]=State.HIT;// update the cell of the boat because it was hitten (row-c.row will return the index of the hitten cell)                          
+                        return true;
+                    }
                 }
             }
         }
+        sea[row][col]=State.WATER;
         return true;
     }
     

@@ -39,8 +39,8 @@ public class Game {
             Pattern pattern = Pattern.compile("[A-J][10|[1-9]]");
             Matcher matcher = pattern.matcher(command);
             while(true){
-                if(command.length()>2 || !matcher.find()){
-                    System.out.println("Veuillez rentrer une commande valide au format lettre-chiffre :");
+                if(command.length()<2 || !matcher.find()){
+                    System.out.println("Please enter a valid command in the format LetterDigit :");
                     command = sc.nextLine(); 
                     command.toUpperCase();
                 }
@@ -63,6 +63,5 @@ public class Game {
             }
         }
     }
-    
-    
+       
 }

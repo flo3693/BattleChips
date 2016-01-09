@@ -21,7 +21,7 @@ public class BattleChips {
         Game currentGame = new Game();
         Scanner sc = new Scanner(System.in);
         String command;
-        System.out.println("Please entre a command between quit(q), restart(r) and the coordinates of a cell (letterdigit).");
+        System.out.println("Please entre a command between quit(q), restart(r) and the coordinates of a cell (LetterDigit).");
         while(!currentGame.currentBoard.isFinished()){
             currentGame.currentBoard.display();
             System.out.println("Please enter a command : ");
