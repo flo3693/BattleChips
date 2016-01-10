@@ -93,7 +93,7 @@ public class Board {
         return true;
     }
     
-    public void display(){
+    public void display1(){
     	
     	System.out.println("  A   B   C   D   E   F   G   H   I   J");
         System.out.println(" ---------------------------------------");
@@ -132,7 +132,7 @@ public class Board {
     	return null;
     }*/
     
-    public void displayNico() {
+    public void display() {
     	/*for (int i = 0; i < 5; i++) {
     		Chip c = chips[i];
     		System.out.println("(" + c.col + "," + c.row + ") " + c.direction + " / " +
