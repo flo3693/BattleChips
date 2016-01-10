@@ -1,5 +1,6 @@
 
 
+import battlechips.Game;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -20,7 +21,7 @@ public class Test_Board {
 
     @Test
     private void test_initChips(){
-
+        
     }
 
     @Test
@@ -31,6 +32,11 @@ public class Test_Board {
     @Test
     private void test_collision(){
 
+    }
+    
+    @Test
+    private void test_readCommand(){
+        
     }
 
 }
