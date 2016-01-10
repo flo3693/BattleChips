@@ -39,15 +39,15 @@ public class Test_Board {
 
     @Test
     public void test_fire(){
-        Game.currentBoard.getChips()[0].setCoordonates(0, 0);
+        Game.currentBoard.getChips()[0].setCoordinates(0, 0);
         Game.currentBoard.getChips()[0].setDirection(0);
-        Game.currentBoard.getChips()[1].setCoordonates(0, 4);
+        Game.currentBoard.getChips()[1].setCoordinates(0, 4);
         Game.currentBoard.getChips()[1].setDirection(0);
-        Game.currentBoard.getChips()[2].setCoordonates(2, 0);
+        Game.currentBoard.getChips()[2].setCoordinates(2, 0);
         Game.currentBoard.getChips()[2].setDirection(1);
-        Game.currentBoard.getChips()[3].setCoordonates(5, 9);
+        Game.currentBoard.getChips()[3].setCoordinates(5, 9);
         Game.currentBoard.getChips()[3].setDirection(1);
-        Game.currentBoard.getChips()[4].setCoordonates(6, 0);
+        Game.currentBoard.getChips()[4].setCoordinates(6, 0);
         Game.currentBoard.getChips()[4].setDirection(0);
         Game.currentBoard.fire(1,1);
         Assert.assertEquals(Game.currentBoard.fire(1,1),false);// tir sur une case déjà tirée
@@ -58,15 +58,15 @@ public class Test_Board {
 
     @Test
     public void test_collision(){
-        Game.currentBoard.getChips()[0].setCoordonates(0, 0);
+        Game.currentBoard.getChips()[0].setCoordinates(0, 0);
         Game.currentBoard.getChips()[0].setDirection(0);
-        Game.currentBoard.getChips()[1].setCoordonates(0, 4);
+        Game.currentBoard.getChips()[1].setCoordinates(0, 4);
         Game.currentBoard.getChips()[1].setDirection(0);
-        Game.currentBoard.getChips()[2].setCoordonates(2, 0);
+        Game.currentBoard.getChips()[2].setCoordinates(2, 0);
         Game.currentBoard.getChips()[2].setDirection(1);
-        Game.currentBoard.getChips()[3].setCoordonates(5, 9);
+        Game.currentBoard.getChips()[3].setCoordinates(5, 9);
         Game.currentBoard.getChips()[3].setDirection(1);
-        Game.currentBoard.getChips()[4].setCoordonates(6, 0);
+        Game.currentBoard.getChips()[4].setCoordinates(6, 0);
         Game.currentBoard.getChips()[4].setDirection(0);
         Assert.assertEquals(true, Game.currentBoard.collision(0, 0, 1, 3, Game.currentBoard.getChips()[0]));// collision
         Assert.assertEquals(false, Game.currentBoard.collision(0, 0, 1, 3, Game.currentBoard.getChips()[3]));// pas de collision
