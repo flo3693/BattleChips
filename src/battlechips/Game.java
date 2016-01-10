@@ -15,21 +15,19 @@ import java.util.regex.*;
  */
 public class Game {
     
-    static Board currentBoard;
-    static boolean quit = false;
-    
-    public Game(){
-        currentBoard = new Board();
-    }
+    public static boolean quit = false;
+    public static Board currentBoard;
     
     public static void createNewBoard(){
     	currentBoard = new Board();
     }
     
-    public static void readCommand(String command){
-        Scanner sc = new Scanner(System.in);
+    @SuppressWarnings("resource")
+	public static void readCommand(String command){                    
+    	Scanner sc = new Scanner(System.in);
         command = command.toUpperCase();
-        while(true){
+        boolean commandOK = false;
+        while(!commandOK){
             if(command.equals("Q") || command.equals("QUIT")){
                 System.out.println("END OF THE GAME !");
                 System.exit(0);
@@ -61,7 +59,7 @@ public class Game {
                     letters.add("J");
                     int col = letters.indexOf(command.substring(0,1));
                     currentBoard.fire(Integer.parseInt(command.substring(1))-1,col);
-                    break;
+                    commandOK = true;
                 }
             }
         }

@@ -39,9 +39,9 @@ public class Board {
     
     private void initChips(){
         Random r = new Random();
+        /*Initialisation of the first chip*/
         int col = ((chips[0].direction==0)?r.nextInt(9-chips[0].size):r.nextInt(9));
         int row = ((chips[0].direction==1)?r.nextInt(9-chips[0].size):r.nextInt(9));
-    	
         chips[0].setCoordonates(row, col);
         int i = 1;
         boolean collisionDetected;
