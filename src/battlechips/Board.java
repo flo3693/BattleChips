@@ -145,9 +145,9 @@ public class Board {
     		line = (i == 9 ? " " : "  ") + (i + 1) + " ";
     		for (int j = 0; j < 10; j++) {
     			if (sea[i][j] == State.WATER) {
-    				line += " 0 ";
+    				line += " o ";
     			} else if (sea[i][j] == State.HIT) {
-    				line += " X ";
+    				line += " x ";
     			} else {
     				line += " . ";
     			}
