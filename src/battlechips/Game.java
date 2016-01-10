@@ -16,6 +16,22 @@ import java.util.regex.*;
 public class Game {
     
     static Board currentBoard;
+
+    public static Board getCurrentBoard() {
+        return currentBoard;
+    }
+
+    public static void setCurrentBoard(Board currentBoard) {
+        Game.currentBoard = currentBoard;
+    }
+
+    public static boolean isQuit() {
+        return quit;
+    }
+
+    public static void setQuit(boolean quit) {
+        Game.quit = quit;
+    }
     static boolean quit = false;
     
     public Game(){
