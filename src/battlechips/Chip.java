@@ -77,4 +77,8 @@ public class Chip {
         this.col=col;
     }
     
+    public void setDirection(int direction){
+    	this.direction = direction;
+    }
+    
 }
