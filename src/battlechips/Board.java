@@ -63,21 +63,15 @@ public class Board {
     
     private void initChips(){
         Random r = new Random();
-        /*Initialisation of the first chip*/
-        int col = ((chips[0].direction==0)?r.nextInt(9-chips[0].size):r.nextInt(9));
-        int row = ((chips[0].direction==1)?r.nextInt(9-chips[0].size):r.nextInt(9));
-        chips[0].setCoordonates(row, col);
-        int i = 1;
+        int i = 0;
         boolean collisionDetected;
-        while(i<5){
+        while(i < 5){
             collisionDetected = false;
-            col = ((chips[i].direction==0)?r.nextInt(9-chips[i].size):r.nextInt(9)); 
-            row = ((chips[i].direction==1)?r.nextInt(9-chips[i].size):r.nextInt(9));
-            for(int j=0;j<i;j++){
-                if(collision(col, row, chips[i].getDirection(), chips[i].getSize(), chips[j])){
+            int col = ((chips[i].direction==0)?r.nextInt(9-chips[i].size):r.nextInt(9)); 
+            int row = ((chips[i].direction==1)?r.nextInt(9-chips[i].size):r.nextInt(9));
+            for(int j=0 ; j<i && !collisionDetected; j++){
+                if(collision(col, row, chips[i].getDirection(), chips[i].getSize(), chips[j]))
                     collisionDetected = true;
-                    break;
-                }
             }
             if(!collisionDetected){
                 chips[i].setCoordonates(row, col);
@@ -175,10 +169,8 @@ public class Board {
      * @return true if the fire hit a cell never hitten before
      */
     public boolean fire(int row, int col){
-        if(sea[row][col]!=State.UNKNOWN){
-            System.out.println("You already fired this cell. Try another one !");
+        if(sea[row][col]!=State.UNKNOWN)
             return false;
-        }        
         for(Chip c : chips){
             if(c.direction==0){// if the chip is horizontally placed
                 if(row==c.row){// if the fire is on the same line as the chip
