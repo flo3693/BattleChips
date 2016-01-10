@@ -57,6 +57,12 @@ public class Test_Board {
         Assert.assertEquals(Game.currentBoard.fire(7,9),true);// tir sur un bateau vertical
         Assert.assertEquals(Game.currentBoard.fire(9,0),true);// tir dans l'eau
     }
+    
+    @Test
+    public void test_fire_functionnal(){
+    	assertEquals(true, Game.currentBoard.fire(1, 3));
+    	assertEquals(false, Game.currentBoard.fire(1, 3));
+    }
 
     @Test
     public void test_collision(){
@@ -72,6 +78,16 @@ public class Test_Board {
         Game.currentBoard.getChips()[4].setDirection(0); 
         Assert.assertEquals(true, Game.currentBoard.collision(0, 0, 1, 3, Game.currentBoard.getChips()[0]));// collision
         Assert.assertEquals(false, Game.currentBoard.collision(0, 0, 1, 3, Game.currentBoard.getChips()[3]));// pas de collision
+    }
+    
+    @Test
+    public void test_collision_functionnal(){
+    	Chip chip = new Chip(4);
+    	chip.setCoordinates(1, 1);
+    	chip.setDirection(0);
+    	assertEquals(true, Game.currentBoard.collision(2, 0, 1, 3, chip));
+    	assertEquals(false, Game.currentBoard.collision(2, 0, 0, 3, chip));
+    	chip = null;
     }
     
     @Test
