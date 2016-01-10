@@ -74,7 +74,7 @@ public class Board {
                     collisionDetected = true;
             }
             if(!collisionDetected){
-                chips[i].setCoordonates(row, col);
+                chips[i].setCoordinates(col, row);
                 i++;
             }
         }
@@ -140,9 +140,10 @@ public class Board {
     	}*/
     	String line;
     	System.out.println();
-    	System.out.println("  `  A  B  C  D  E  F  G  H  I  J");
+    	System.out.println("  `    A  B  C  D  E  F  G  H  I  J");
+    	System.out.println();
     	for (int i = 0; i < 10; i++) {
-    		line = (i == 9 ? " " : "  ") + (i + 1) + " ";
+    		line = (i == 9 ? " " : "  ") + (i + 1) + "   ";
     		for (int j = 0; j < 10; j++) {
     			if (sea[i][j] == State.WATER) {
     				line += " o ";

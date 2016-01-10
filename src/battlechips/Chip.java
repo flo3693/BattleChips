@@ -95,12 +95,12 @@ public class Chip {
 	 * @param row The row index of the "chip".
 	 * @param col The column index of the "chip".
 	 */
-	public void setCoordonates(int row, int col) {
+	public void setCoordinates(int col, int row) {
 		// Clamp input indices in [0,9]
-		if (row < 0) row = 0;
-		else if (row > 9) row = 9;
 		if (col < 0) col = 0;
 		else if (col > 9) col = 9;
+		if (row < 0) row = 0;
+		else if (row > 9) row = 9;
 		// Set the "chip" coordinates
 		this.col = col;
 		this.row = row;

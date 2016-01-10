@@ -33,7 +33,7 @@ public class Test_Board {
 
     @Test
     public void testFire(){
-        Game.currentBoard.getChips()[0].setCoordonates(0, 0);
+        Game.currentBoard.getChips()[0].setCoordinates(0, 0);
         Game.currentBoard.getChips()[0].setDirection(0);
         Game.currentBoard.fire(1,1);
         Assert.assertEquals(Game.currentBoard.fire(1,1),false);// tir sur une case déjà tirée
