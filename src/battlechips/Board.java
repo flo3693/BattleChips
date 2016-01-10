@@ -48,6 +48,7 @@ public class Board {
         boolean collisionDetected = false;
         System.out.println("right before the loop");
         while(i<5){
+        	collisionDetected = false;
             row = ((chips[i].direction==0)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9)); 
             col = ((chips[i].direction==1)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9));
             for(int j=0;j<i;j++){
@@ -99,6 +100,26 @@ public class Board {
             System.out.println(i+1);
         }
         System.out.println(" ---------------------------------------");        
+    }
+    
+    public void displayNico() {
+    	String line;
+    	System.out.println();
+    	System.out.println("    A  B  C  D  E  F  G  H  I  J");
+    	for (int i = 0; i < 10; i++) {
+    		line = (i == 9 ? " " : "  ") + (i + 1) + " ";
+    		for (int j = 0; j < 10; j++) {
+    			if (sea[i][j] == State.WATER) {
+    				line += " 0 ";
+    			} else if (sea[i][j] == State.HIT) {
+    				line += " X ";
+    			} else {
+    				line += " - ";
+    			}
+    		}
+    		System.out.println(line);
+    	}
+    	System.out.println();
     }
     
     /** Fires at the position specified via row and col
