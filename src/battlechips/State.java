@@ -7,10 +7,24 @@ package battlechips;
 
 /**
  * Represents the game state of a board cell.
- * @author Florian
+ * @author Florian, Nicolas
  */
 public enum State {
-    WATER, // No "chip" on this cell.
-    HIT, // A "chip" was hit on the cell.
-    UNKNOWN; // 
+	WATER,   // No "chip" on this cell.
+	HIT,     // A "chip" was hit on the cell.
+	UNKNOWN; // The cell was not fired yet.
+	
+	/**
+	 * Gets the string representation of a cell state.
+	 * @param cell The state of a cell.
+	 * @return the string representing this cell state.
+	 */
+	public static String toString(State cell) {
+		switch (cell) {
+		case WATER:   return "o";
+		case HIT:     return "x";
+		case UNKNOWN: return ".";
+		default:      return " ";
+		}
+	}
 }
