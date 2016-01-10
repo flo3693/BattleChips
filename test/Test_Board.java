@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class Test_Board {
-    Game game = new Game();
     
-    public Test_Board() {
+    public Test_Board() {        
+        Game.createNewBoard();
     }
     
     @Before
@@ -27,23 +27,25 @@ public class Test_Board {
     }
 
     @Test
-    private void test_initChips(){
+    public void test_initChips(){
         
     }
 
     @Test
-    private void test_fire(){
-        game.getCurrentBoard().fire(1,1);
-        Assert.assertFalse(game.getCurrentBoard().fire(1,1));
+    public void testFire(){
+        Game.currentBoard.getChips()[0].setCoordonates(0, 0);
+        Game.currentBoard.getChips()[0].setDirection(0);
+        Game.currentBoard.fire(1,1);
+        Assert.assertEquals(Game.currentBoard.fire(1,1),false);// tir sur une case déjà tirée
     }
 
     @Test
-    private void test_collision(){
+    public void test_collision(){
 
     }
     
     @Test
-    private void test_readCommand(){
+    public void test_readCommand(){
         
     }
 

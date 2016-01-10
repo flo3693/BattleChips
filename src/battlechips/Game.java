@@ -14,7 +14,6 @@ import java.util.regex.*;
  * @author Florian
  */
 public class Game {
-
     
     public static boolean quit = false;
     public static Board currentBoard;
@@ -43,8 +42,8 @@ public class Game {
     	currentBoard = new Board();
     }
     
-    @SuppressWarnings("resource")
-	public static void readCommand(String command){                    
+
+    public static void readCommand(String command){                    
     	Scanner sc = new Scanner(System.in);
         command = command.toUpperCase();
         boolean commandOK = false;
