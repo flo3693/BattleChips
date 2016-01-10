@@ -40,7 +40,7 @@ public class Game {
                 break;
             }
             else {
-                Pattern pattern = Pattern.compile("^[A-J][1-9]$|^[A-J]10$");
+                Pattern pattern = Pattern.compile("^[A-J]([1-9]|10)$");
                 Matcher matcher = pattern.matcher(command);            
                 if(!matcher.find()){
                     System.out.println("Please enter a valid command in the format LetterDigit :");
