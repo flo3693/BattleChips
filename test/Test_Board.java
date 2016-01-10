@@ -30,9 +30,10 @@ public class Test_Board {
     public void test_initChips(){
         for(int i=0; i<4; i++){
             for(int j=i+1;j<5;j++){                
-                Assert.assertEquals(false,Game.currentBoard.collision(Game.currentBoard.getChips()[i].getRow(),Game.currentBoard.getChips()[i].getCol(),
-                        Game.currentBoard.getChips()[i].getDirection(), Game.currentBoard.getChips()[i].getSize(),
-                        Game.currentBoard.getChips()[j]));// vérification qu'aucun bateau n'entre en collision avec un autre
+                Assert.assertEquals(false,Game.currentBoard.collision(Game.currentBoard.getChips()[i].getCol(),
+                        Game.currentBoard.getChips()[i].getRow(), Game.currentBoard.getChips()[i].getDirection(), 
+                        Game.currentBoard.getChips()[i].getSize(), Game.currentBoard.getChips()[j]));
+                        // vérification qu'aucun bateau n'entre pas en collision avec un autre
             }
         }
     }
