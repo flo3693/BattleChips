@@ -40,8 +40,8 @@ public class Board {
     private void initChips(){
         Random r = new Random();
     	System.out.println("I start initship");
-        int row = ((chips[0].direction==0)?1+r.nextInt(9-chips[0].size):1+r.nextInt(9));
-        int col = ((chips[0].direction==1)?1+r.nextInt(9-chips[0].size):1+r.nextInt(9));
+        int col = ((chips[0].direction==0)?r.nextInt(9-chips[0].size):r.nextInt(9));
+        int row = ((chips[0].direction==1)?r.nextInt(9-chips[0].size):r.nextInt(9));
     	
         chips[0].setCoordonates(row, col);
         int i = 1;
@@ -49,16 +49,16 @@ public class Board {
         System.out.println("right before the loop");
         while(i<5){
         	collisionDetected = false;
-            row = ((chips[i].direction==0)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9)); 
-            col = ((chips[i].direction==1)?1+r.nextInt(9-chips[i].size):1+r.nextInt(9));
+            col = ((chips[i].direction==0)?r.nextInt(9-chips[i].size):r.nextInt(9)); 
+            row = ((chips[i].direction==1)?r.nextInt(9-chips[i].size):r.nextInt(9));
             for(int j=0;j<i;j++){
                 System.out.println("collision in");
-                if(collision(row, col, chips[i].getDirection(), chips[i].getSize(), chips[j])){
+                if(collision(col, row, chips[i].getDirection(), chips[i].getSize(), chips[j])){
                     collisionDetected = true;
                     break;
                 }
                 System.out.println("collision out");
-            }            
+            }
             if(!collisionDetected){
                 chips[i].setCoordonates(row, col);
                 i++;
@@ -102,10 +102,31 @@ public class Board {
         System.out.println(" ---------------------------------------");        
     }
     
+    /*private Chip _TEMP_collisionAt(int col, int row) {
+    	for (int i = 0, len = chips.length; i < len; i++) {
+    		Chip chip = chips[i];
+    		if (chips[i].getDirection() == 0 && row == chip.getRow()) {
+    			if (col >= chip.getCol() && col < chip.getCol() + chip.getSize()) {
+    				return chip;
+    			}
+    		} else if (chips[i].getDirection() == 1 && col == chips[i].getCol()) {
+    			if (row >= chip.getRow() && row < chip.getRow() + chip.getSize()) {
+    				return chip;
+    			}
+    		}
+    	}
+    	return null;
+    }*/
+    
     public void displayNico() {
+    	/*for (int i = 0; i < 5; i++) {
+    		Chip c = chips[i];
+    		System.out.println("(" + c.col + "," + c.row + ") " + c.direction + " / " +
+    				c.size);
+    	}*/
     	String line;
     	System.out.println();
-    	System.out.println("     A  B  C  D  E  F  G  H  I  J");
+    	System.out.println("  `  A  B  C  D  E  F  G  H  I  J");
     	for (int i = 0; i < 10; i++) {
     		line = (i == 9 ? " " : "  ") + (i + 1) + " ";
     		for (int j = 0; j < 10; j++) {
@@ -114,8 +135,14 @@ public class Board {
     			} else if (sea[i][j] == State.HIT) {
     				line += " X ";
     			} else {
-    				line += " - ";
+    				line += " . ";
     			}
+    			/*Chip chip = _TEMP_collisionAt(j, i);
+    			if (chip != null) {
+    				line += chip.direction == 0 ? " - " : " | ";
+    			} else {
+    				line += "   ";
+    			}*/
     		}
     		System.out.println(line);
     	}
@@ -164,22 +191,23 @@ public class Board {
      * @return true if the object collides the "chip".
      */
     public boolean collision(int col, int row, int direction, int size, Chip chip) {
+    	// TODO: use getters!
     	boolean collide = false;
-    	if (chip.direction == 0) {
+    	if (chip.getDirection() == 0) {
     		if (direction == 0) {
     			collide = row == chip.row &&
-    					col < chip.col + chip.size && col + size > chip.col;
+    					col < chip.col + chip.getSize() && col + size > chip.col;
     		} else if (direction == 1) {
     			collide = row <= chip.row && row + size > chip.row &&
-    					col >= chip.col && col < chip.col + chip.size;
+    					col >= chip.col && col < chip.col + chip.getSize();
     		}
-    	} else if (chip.direction == 1) {
+    	} else if (chip.getDirection() == 1) {
     		if (direction == 0) {
     			collide = col <= chip.col && col + size > chip.col &&
-    					row >= chip.row && row < chip.row + chip.size;
+    					row >= chip.row && row < chip.row + chip.getSize();
     		} else if (direction == 1) {
     			collide = col == chip.col &&
-    					row < chip.row + chip.size && row + size > chip.row;
+    					row < chip.row + chip.getSize() && row + size > chip.row;
     		}
     	}
     	return collide;

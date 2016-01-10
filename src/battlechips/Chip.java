@@ -41,6 +41,22 @@ public class Chip {
     }
     
     /**
+     * Returns the column index of a "chip"
+     * @return the column index of a "chip" (0-based)
+     */
+    public int getCol() {
+    	return col;
+    }
+    
+    /**
+     * Returns the row index of a "chip"
+     * @return the row index of a "chip" (0-based)
+     */
+    public int getRow() {
+    	return row;
+    }
+    
+    /**
      * Gets the direction of a "chip".
      * @return the direction of a "chip".
      */
