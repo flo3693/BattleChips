@@ -79,6 +79,7 @@ public class Game {
                     command = command.toUpperCase();
                 }
                 else{
+                    currentBoard.nbFires++;
                     commandOK = true;
                 }
             }

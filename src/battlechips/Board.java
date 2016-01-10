@@ -14,6 +14,8 @@ import java.util.Random;
 public class Board {
     
     Chip[] chips;
+    State[][] sea;
+    int nbFires;
 
     public Chip[] getChips() {
         return chips;
@@ -38,8 +40,6 @@ public class Board {
     public void setNbFires(int nbFires) {
         this.nbFires = nbFires;
     }
-    State[][] sea;
-    int nbFires;
     
     public Board(){
         chips = new Chip[5];

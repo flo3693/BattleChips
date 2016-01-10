@@ -1,5 +1,7 @@
-package battlechips;
 
+
+import battlechips.Board;
+import battlechips.Chip;
 import static org.junit.Assert.*;
 
 import org.junit.After;

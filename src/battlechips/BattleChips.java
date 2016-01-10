@@ -35,7 +35,9 @@ public class BattleChips {
             command = sc.nextLine();
             Game.readCommand(command);
         }
-        Game.currentBoard.display();            
+        Game.currentBoard.display();
+        System.out.println("Score final : "+Game.currentBoard.nbFires);
+        System.out.println("Pourcentage de précision : "+(17/Game.currentBoard.nbFires));
     }
     
 }
