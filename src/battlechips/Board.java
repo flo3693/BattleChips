@@ -45,19 +45,16 @@ public class Board {
     	
         chips[0].setCoordonates(row, col);
         int i = 1;
-        boolean collisionDetected = false;
-        System.out.println("right before the loop");
+        boolean collisionDetected;
         while(i<5){
-        	collisionDetected = false;
+            collisionDetected = false;
             col = ((chips[i].direction==0)?r.nextInt(9-chips[i].size):r.nextInt(9)); 
             row = ((chips[i].direction==1)?r.nextInt(9-chips[i].size):r.nextInt(9));
             for(int j=0;j<i;j++){
-                System.out.println("collision in");
                 if(collision(col, row, chips[i].getDirection(), chips[i].getSize(), chips[j])){
                     collisionDetected = true;
                     break;
                 }
-                System.out.println("collision out");
             }
             if(!collisionDetected){
                 chips[i].setCoordonates(row, col);
@@ -164,6 +161,8 @@ public class Board {
                 if(row==c.row){// if the fire is on the same line as the chip
                     if(col>=c.col && col<=(c.col+c.size)){// we hit a chip
                         sea[row][col]=State.HIT;// update the cell of the boat because it was hitten (col-c.col will return the index of the hitten cell)
+                        c.hit[(c.col + c.size) - col] = true;
+                        System.out.println("HIT !");
                         return true;
                     }
                 }
@@ -172,12 +171,15 @@ public class Board {
                 if(col==c.col){// if the fire is on the same column as the chip
                     if(row>=c.row && row<=(c.row+c.size)){// we hit a chip
                         sea[row][col]=State.HIT;// update the cell of the boat because it was hitten (row-c.row will return the index of the hitten cell)                          
+                        c.hit[(c.row + c.size) - row] = true;
+                        System.out.println("HIT !");
                         return true;
                     }
                 }
             }
         }
         sea[row][col]=State.WATER;
+        System.out.println("IN THE WATER !");
         return true;
     }
     

@@ -28,21 +28,24 @@ public class Game {
     
     public static void readCommand(String command){
         Scanner sc = new Scanner(System.in);
-        command.toUpperCase();
-        if(command == "Q" || command == "QUIT"){
-            System.exit(0);
-        }
-        else if(command == "R" || command=="RESTART"){
-            createNewBoard();
-        }
-        else {
-            Pattern pattern = Pattern.compile("[A-J][10|[1-9]]");
-            Matcher matcher = pattern.matcher(command);
-            while(true){
-                if(command.length()<2 || !matcher.find()){
+        command = command.toUpperCase();
+        while(true){
+            if(command.equals("Q") || command.equals("QUIT")){
+                System.out.println("END OF THE GAME !");
+                System.exit(0);
+            }
+            else if(command.equals("R") || command.equals("RESTART")){
+                System.out.println("NEW GAME ...");
+                createNewBoard();
+                break;
+            }
+            else {
+                Pattern pattern = Pattern.compile("^[A-J][1-9]$|^[A-J]10$");
+                Matcher matcher = pattern.matcher(command);            
+                if(!matcher.find()){
                     System.out.println("Please enter a valid command in the format LetterDigit :");
                     command = sc.nextLine(); 
-                    command.toUpperCase();
+                    command = command.toUpperCase();
                 }
                 else{
                     ArrayList<String> letters = new ArrayList<String>();
@@ -62,6 +65,5 @@ public class Game {
                 }
             }
         }
-    }
-       
+    }       
 }
