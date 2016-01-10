@@ -145,13 +145,7 @@ public class Board {
     	for (int i = 0; i < 10; i++) {
     		line = (i == 9 ? " " : "  ") + (i + 1) + "   ";
     		for (int j = 0; j < 10; j++) {
-    			if (sea[i][j] == State.WATER) {
-    				line += " o ";
-    			} else if (sea[i][j] == State.HIT) {
-    				line += " x ";
-    			} else {
-    				line += " . ";
-    			}
+    			line += " " + State.toString(sea[i][j]) + " ";
     			/*Chip chip = _TEMP_collisionAt(j, i);
     			if (chip != null) {
     				line += chip.direction == 0 ? " - " : " | ";
