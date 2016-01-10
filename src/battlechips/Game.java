@@ -20,6 +20,26 @@ public class Game {
     public static boolean quit = false;
     public static Board currentBoard;
     
+    public static Board getCurrentBoard() {
+        return currentBoard;
+    }
+
+    public static void setCurrentBoard(Board currentBoard) {
+        Game.currentBoard = currentBoard;
+    }
+
+    public static boolean isQuit() {
+        return quit;
+    }
+
+    public static void setQuit(boolean quit) {
+        Game.quit = quit;
+    }
+    
+    public Game(){
+        currentBoard = new Board();
+    }
+    
     public static void createNewBoard(){
     	currentBoard = new Board();
         letters.add("A");
