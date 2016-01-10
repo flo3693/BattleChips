@@ -151,10 +151,8 @@ public class Board {
      * @return true if the fire hit a cell never hitten before
      */
     public boolean fire(int row, int col){
-        if(sea[row][col]!=State.UNKNOWN){
-            System.out.println("You already fired this cell. Try another one !");
+        if(sea[row][col]!=State.UNKNOWN)
             return false;
-        }        
         for(Chip c : chips){
             if(c.direction==0){// if the chip is horizontally placed
                 if(row==c.row){// if the fire is on the same line as the chip
