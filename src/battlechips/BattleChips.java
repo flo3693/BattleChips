@@ -22,13 +22,19 @@ public class BattleChips {
         Scanner sc = new Scanner(System.in);
         String command;
         System.out.println("Please enter a command among quit(q), restart(r) and the coordinates of a cell (LetterDigit).");
+        for(int i=0;i<Game.currentBoard.chips.length;i++){
+            System.out.print(Game.currentBoard.chips[i].getCol()+" ");
+            System.out.print(Game.currentBoard.chips[i].getRow()+" ");
+            System.out.print(Game.currentBoard.chips[i].getDirection()+" ");
+            System.out.println(Game.currentBoard.chips[i].getSize());
+        }
         while(!currentGame.currentBoard.isFinished()){
             currentGame.currentBoard.display();
             System.out.println("Please enter a command : ");
             command = sc.nextLine();
             currentGame.readCommand(command);
         }
-            
+        currentGame.currentBoard.display();            
     }
     
 }
