@@ -80,7 +80,7 @@ public class Test_Board {
     }
     
     @Test
-    public void test_collision(){
+    public void test_collision_functionnal(){
     	Chip chip = new Chip(4);
     	chip.setCoordinates(1, 1);
     	chip.setDirection(0);
