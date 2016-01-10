@@ -14,6 +14,30 @@ import java.util.Random;
 public class Board {
     
     Chip[] chips;
+
+    public Chip[] getChips() {
+        return chips;
+    }
+
+    public void setChips(Chip[] chips) {
+        this.chips = chips;
+    }
+
+    public State[][] getSea() {
+        return sea;
+    }
+
+    public void setSea(State[][] sea) {
+        this.sea = sea;
+    }
+
+    public int getNbFires() {
+        return nbFires;
+    }
+
+    public void setNbFires(int nbFires) {
+        this.nbFires = nbFires;
+    }
     State[][] sea;
     int nbFires;
     
@@ -39,10 +63,9 @@ public class Board {
     
     private void initChips(){
         Random r = new Random();
-    	System.out.println("I start initship");
+        /*Initialisation of the first chip*/
         int col = ((chips[0].direction==0)?r.nextInt(9-chips[0].size):r.nextInt(9));
         int row = ((chips[0].direction==1)?r.nextInt(9-chips[0].size):r.nextInt(9));
-    	
         chips[0].setCoordonates(row, col);
         int i = 1;
         boolean collisionDetected;
@@ -159,9 +182,9 @@ public class Board {
         for(Chip c : chips){
             if(c.direction==0){// if the chip is horizontally placed
                 if(row==c.row){// if the fire is on the same line as the chip
-                    if(col>=c.col && col<=(c.col+c.size)){// we hit a chip
+                    if(col>=c.col && col<(c.col+c.size)){// we hit a chip
                         sea[row][col]=State.HIT;// update the cell of the boat because it was hitten (col-c.col will return the index of the hitten cell)
-                        c.hit[(c.col + c.size) - col] = true;
+                        c.hit[(c.col + c.size) - col - 1] = true;
                         System.out.println("HIT !");
                         return true;
                     }
@@ -169,9 +192,9 @@ public class Board {
             }
             else{
                 if(col==c.col){// if the fire is on the same column as the chip
-                    if(row>=c.row && row<=(c.row+c.size)){// we hit a chip
+                    if(row>=c.row && row<(c.row+c.size)){// we hit a chip
                         sea[row][col]=State.HIT;// update the cell of the boat because it was hitten (row-c.row will return the index of the hitten cell)                          
-                        c.hit[(c.row + c.size) - row] = true;
+                        c.hit[(c.row + c.size) - row - 1] = true;
                         System.out.println("HIT !");
                         return true;
                     }

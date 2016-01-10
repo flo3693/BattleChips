@@ -16,19 +16,26 @@ public class BattleChips {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    @SuppressWarnings("resource")
+	public static void main(String[] args) {
         System.out.println("Welcome in BATTLECHIPS !!!!!!");
-        Game currentGame = new Game();
         Scanner sc = new Scanner(System.in);
+        Game.createNewBoard();
         String command;
         System.out.println("Please enter a command among quit(q), restart(r) and the coordinates of a cell (LetterDigit).");
-        while(!currentGame.currentBoard.isFinished()){
-            currentGame.currentBoard.display();
+        for(int i=0;i<Game.currentBoard.chips.length;i++){
+            System.out.print(Game.currentBoard.chips[i].getCol()+" ");
+            System.out.print(Game.currentBoard.chips[i].getRow()+" ");
+            System.out.print(Game.currentBoard.chips[i].getDirection()+" ");
+            System.out.println(Game.currentBoard.chips[i].getSize());
+        }
+        while(!Game.currentBoard.isFinished()){
+            Game.currentBoard.display();
             System.out.println("Please enter a command : ");
             command = sc.nextLine();
-            currentGame.readCommand(command);
+            Game.readCommand(command);
         }
-            
+        Game.currentBoard.display();            
     }
     
 }
