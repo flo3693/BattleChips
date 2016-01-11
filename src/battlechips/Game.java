@@ -52,7 +52,7 @@ public class Game {
         letters.add("J");
     }
     
-	public static boolean readCommand(String command){     
+    public static boolean readCommand(String command){     
         command = command.toUpperCase();
         if(command.equals("Q") || command.equals("QUIT")){
             System.out.println("END OF THE GAME !");
