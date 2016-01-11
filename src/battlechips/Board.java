@@ -14,6 +14,8 @@ import java.util.Random;
 public class Board {
     
     Chip[] chips;
+    State[][] sea;
+    int nbFires;
 
     public Chip[] getChips() {
         return chips;
@@ -38,8 +40,6 @@ public class Board {
     public void setNbFires(int nbFires) {
         this.nbFires = nbFires;
     }
-    State[][] sea;
-    int nbFires;
     
     public Board(){
         chips = new Chip[5];
@@ -193,36 +193,41 @@ public class Board {
         return true;
     }
     
-    /**
-     * Returns whether an object collides a "chip".
-     * @param col The column index of the object.
-     * @param row The row index of the object.
-     * @param direction The direction of the object.
-     * @param size The size of the object.
-     * @param chip The "chip" to collide.
-     * @return true if the object collides the "chip".
-     */
-    public boolean collision(int col, int row, int direction, int size, Chip chip) {
-    	// TODO: use getters!
-    	boolean collide = false;
-    	if (chip.getDirection() == 0) {
-    		if (direction == 0) {
-    			collide = row == chip.row &&
-    					col < chip.col + chip.getSize() && col + size > chip.col;
-    		} else if (direction == 1) {
-    			collide = row <= chip.row && row + size > chip.row &&
-    					col >= chip.col && col < chip.col + chip.getSize();
-    		}
-    	} else if (chip.getDirection() == 1) {
-    		if (direction == 0) {
-    			collide = col <= chip.col && col + size > chip.col &&
-    					row >= chip.row && row < chip.row + chip.getSize();
-    		} else if (direction == 1) {
-    			collide = col == chip.col &&
-    					row < chip.row + chip.getSize() && row + size > chip.row;
-    		}
-    	}
-    	return collide;
-    }
-    
+	/**
+	 * Returns whether an object collides a "chip".
+	 * @param col The column index of the object.
+	 * @param row The row index of the object.
+	 * @param direction The direction of the object.
+	 * @param size The size of the object.
+	 * @param chip The "chip" to collide.
+	 * @return true if the object collides the "chip".
+	 */
+	public boolean collision(int col, int row, int direction, int size, Chip chip) {
+		boolean collide = false;
+		if (chip.getDirection() == 0) {
+			if (direction == 0) {
+				collide = row == chip.getRow() &&
+						col < chip.getCol() + chip.getSize() &&
+						col + size > chip.getCol();
+			} else {
+				collide = row <= chip.getRow() &&
+						row + size > chip.getRow() &&
+						col >= chip.getCol() &&
+						col < chip.getCol() + chip.getSize();
+			}
+		} else {
+			if (direction == 0) {
+				collide = col <= chip.getCol() &&
+						col + size > chip.getCol() &&
+						row >= chip.getRow() &&
+						row < chip.getRow() + chip.getSize();
+			} else {
+				collide = col == chip.getCol() &&
+						row < chip.getRow() + chip.getSize() &&
+						row + size > chip.getRow();
+			}
+		}
+		return collide;
+	}
+	
 }
