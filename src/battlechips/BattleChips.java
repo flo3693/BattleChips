@@ -37,7 +37,8 @@ public class BattleChips {
         }
         Game.currentBoard.display();
         System.out.println("Score final : "+Game.currentBoard.nbFires);
-        System.out.println("Pourcentage de précision : "+((17/Game.currentBoard.nbFires)*100)+"%");
+        int precision = (int) ( Math.round(((17.0/Game.currentBoard.nbFires)*100.0)));
+        System.out.println("Pourcentage de précision : "+precision+"%");
     }
     
 }

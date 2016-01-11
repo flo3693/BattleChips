@@ -16,7 +16,8 @@ public class Board {
     Chip[] chips;
     State[][] sea;
     int nbFires;
-
+    int nbChipsAlive=5;
+    
     public Chip[] getChips() {
         return chips;
     }
@@ -85,12 +86,24 @@ public class Board {
      * @return true if the game board is finished.
      */
     public boolean isFinished(){
-        for(int i=0;i<5;i++)
+        int nbChips=0;
+        
+        
+    	for(int i=0;i<5;i++)
         {
+        	
             if(!chips[i].isSunk())
-                return false;
+                nbChips++;
         }
+    	if(nbChips<nbChipsAlive && nbChipsAlive>0){
+    		nbChipsAlive--;
+    		System.out.println("Chip DESTROYED !");
+    	}
+    	
+    	if(nbChipsAlive==0){
         return true;
+    	}
+    	return false;
     }
     
     public void display1(){
