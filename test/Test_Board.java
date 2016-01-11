@@ -66,7 +66,7 @@ public class Test_Board {
 		Chip chip = new Chip(5);
 		chip.setCoordinates(2, 1);
 		chip.setDirection(0);
-		Assert.assertEquals(false, Game.currentBoard.collision(7, 2, 0, 2, chip));
+		Assert.assertEquals(false, Game.currentBoard.collision(4, 2, 0, 2, chip));
 		Assert.assertEquals(false, Game.currentBoard.collision(7, 1, 0, 2, chip));
 		Assert.assertEquals(false, Game.currentBoard.collision(0, 1, 0, 2, chip));
 		Assert.assertEquals(true, Game.currentBoard.collision(1, 1, 0, 2, chip));
@@ -85,10 +85,10 @@ public class Test_Board {
 		Assert.assertEquals(false, Game.currentBoard.collision(4, 9, 0, 4, chip));
 		Assert.assertEquals(true, Game.currentBoard.collision(4, 7, 0, 4, chip));
 		chip.setCoordinates(5, 4);
-		Assert.assertEquals(false, Game.currentBoard.collision(4, 3, 1, 4, chip));
-		Assert.assertEquals(false, Game.currentBoard.collision(5, 7, 1, 4, chip));
-		Assert.assertEquals(false, Game.currentBoard.collision(5, 0, 1, 4, chip));
-		Assert.assertEquals(true, Game.currentBoard.collision(5, 5, 1, 4, chip));
+		Assert.assertEquals(false, Game.currentBoard.collision(4, 3, 1, 3, chip));
+		Assert.assertEquals(false, Game.currentBoard.collision(5, 7, 1, 3, chip));
+		Assert.assertEquals(false, Game.currentBoard.collision(5, 1, 1, 3, chip));
+		Assert.assertEquals(true, Game.currentBoard.collision(5, 5, 1, 3, chip));
 	}
 	
     @Test
