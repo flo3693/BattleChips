@@ -1,9 +1,6 @@
 
-
-import battlechips.Board;
 import battlechips.Chip;
 import battlechips.Game;
-import battlechips.State;
 import org.junit.After;
 import org.junit.Assert;
 import static org.junit.Assert.*;
@@ -23,7 +20,7 @@ public class Test_Board {
     }
     
     @After
-    public void tearUp(){
+    public void tearDown(){
         
     }
 
@@ -103,38 +100,4 @@ public class Test_Board {
     	assertEquals(false, Game.currentBoard.collision(2, 0, 0, 3, chip));
     	chip = null;
     }
-    
-    @Test
-    public void test_readCommand(){
-        Board ancientBoard = Game.currentBoard;
-        boolean different=false, hitten=false, changement=false;
-        Game.readCommand("R");// test si restart marche bien
-        for(int i=0;i<5;i++){// test si les coordonnées des chips sont différent entre avant et après le restart
-            Chip chip = ancientBoard.getChips()[i];
-            if(chip.getRow() != Game.currentBoard.getChips()[i].getRow() || 
-                    chip.getCol() != Game.currentBoard.getChips()[i].getCol()){// si c'est différent, on passe le booleen à true
-                different = true;
-                break;
-            }
-        }
-        assertEquals(true, different);
-        
-        Game.readCommand("A1");// test si le tir sur une case correct marche bien
-        if(Game.currentBoard.getSea()[0][0] == State.HIT || Game.currentBoard.getSea()[0][0] == State.WATER)
-            hitten = true;
-        assertEquals(true, hitten);
-        
-       /* ancientBoard = Game.currentBoard;
-        Game.readCommand("A1G");// test si le tir sur une case incorrect ne marche pas en comparant l'état de la sea
-        for(int i=0;i<10;i++){
-            for(int j=0; j<10;j++){
-                if(Game.currentBoard.getSea()[i][j] != ancientBoard.getSea()[i][j])
-                    changement = true;
-            }            
-        }
-        
-        assertEquals(false, changement);*/
-        
-    }
-
 }

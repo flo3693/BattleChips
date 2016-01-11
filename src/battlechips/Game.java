@@ -6,7 +6,6 @@
 package battlechips;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.*;
 
 /**
@@ -53,36 +52,30 @@ public class Game {
         letters.add("J");
     }
     
-
-    public static void readCommand(String command){                    
-    	Scanner sc = new Scanner(System.in);
+	public static boolean readCommand(String command){     
         command = command.toUpperCase();
-        boolean commandOK = false;
-        while(!commandOK){
-            if(command.equals("Q") || command.equals("QUIT")){
-                System.out.println("END OF THE GAME !");
-                System.exit(0);
+        if(command.equals("Q") || command.equals("QUIT")){
+            System.out.println("END OF THE GAME !");
+            System.exit(0);
+        }
+        else if(command.equals("R") || command.equals("RESTART")){
+            System.out.println("NEW GAME ...");
+            createNewBoard();
+            return true;
+        }
+        else {
+            Pattern pattern = Pattern.compile("^[A-J]([1-9]|10)$");
+            Matcher matcher = pattern.matcher(command);   
+            int col = letters.indexOf(command.substring(0,1));
+            if(!matcher.find() ||
+            		!currentBoard.fire(Integer.parseInt(command.substring(1))-1,col)){
+               return false;
             }
-            else if(command.equals("R") || command.equals("RESTART")){
-                System.out.println("NEW GAME ...");
-                createNewBoard();
-                break;
-            }
-            else {
-                Pattern pattern = Pattern.compile("^[A-J]([1-9]|10)$");
-                Matcher matcher = pattern.matcher(command);   
-                int col = letters.indexOf(command.substring(0,1));
-                if(!matcher.find() ||
-                		!currentBoard.fire(Integer.parseInt(command.substring(1))-1,col)){
-                    System.out.println("Please enter a valid command in the format LetterDigit :");
-                    command = sc.nextLine(); 
-                    command = command.toUpperCase();
-                }
-                else{
-                    currentBoard.nbFires++;
-                    commandOK = true;
-                }
+            else{
+                currentBoard.nbFires++;
+                return true;
             }
         }
+        return true;
     }       
 }
