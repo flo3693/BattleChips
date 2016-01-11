@@ -23,12 +23,12 @@ public class BattleChips {
         Game.createNewBoard();
         String command;
         System.out.println("Please enter a command among quit(q), restart(r) and the coordinates of a cell (LetterDigit).");
-        for(int i=0;i<Game.currentBoard.chips.length;i++){
+       /* for(int i=0;i<Game.currentBoard.chips.length;i++){
             System.out.print(Game.currentBoard.chips[i].getCol()+" ");
             System.out.print(Game.currentBoard.chips[i].getRow()+" ");
             System.out.print(Game.currentBoard.chips[i].getDirection()+" ");
             System.out.println(Game.currentBoard.chips[i].getSize());
-        }
+        }*/
         while(!Game.currentBoard.isFinished()){
             Game.currentBoard.display();
             System.out.println("Please enter a command : ");
