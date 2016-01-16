@@ -44,6 +44,10 @@ public class Test_Game {
             assertEquals(false, Game.readCommand("A11"));// test si le tir sur une case incorrect renvoie false
             
             assertEquals(false, Game.readCommand("bhfsg"));// test si une mauvaise commande renvoie false
+            assertEquals(true, Game.readCommand("C7"));
+    		assertEquals(false, Game.readCommand("K5"));
+    		assertEquals(false, Game.readCommand("B12"));
+    		assertEquals(false, Game.readCommand("Y76"));
 	}
 
 }
