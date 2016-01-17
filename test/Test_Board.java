@@ -40,13 +40,13 @@ public class Test_Board {
     public void test_fire(){
         Game.currentBoard.getChips()[0].setCoordinates(0, 0);
         Game.currentBoard.getChips()[0].setDirection(0);
-        Game.currentBoard.getChips()[1].setCoordinates(0, 4);
+        Game.currentBoard.getChips()[1].setCoordinates(4, 0);
         Game.currentBoard.getChips()[1].setDirection(0);
-        Game.currentBoard.getChips()[2].setCoordinates(2, 0);
+        Game.currentBoard.getChips()[2].setCoordinates(0, 2);
         Game.currentBoard.getChips()[2].setDirection(1);
-        Game.currentBoard.getChips()[3].setCoordinates(5, 9);
+        Game.currentBoard.getChips()[3].setCoordinates(9, 5);
         Game.currentBoard.getChips()[3].setDirection(1);
-        Game.currentBoard.getChips()[4].setCoordinates(6, 0);
+        Game.currentBoard.getChips()[4].setCoordinates(0, 6);
         Game.currentBoard.getChips()[4].setDirection(0);
         Game.currentBoard.fire(1,1);
         Assert.assertEquals(Game.currentBoard.fire(1,1),false);// tir sur une case déjà tirée

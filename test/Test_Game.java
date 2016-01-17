@@ -41,6 +41,8 @@ public class Test_Game {
                 hitten = true;
             assertEquals(true, hitten);// test si la case s'est bien mis à jour
             
+            assertEquals(false, Game.readCommand("A1"));// test si le tir sur une case déjà choisie renvoie false
+            
             assertEquals(false, Game.readCommand("A11"));// test si le tir sur une case incorrect renvoie false
             
             assertEquals(false, Game.readCommand("bhfsg"));// test si une mauvaise commande renvoie false
